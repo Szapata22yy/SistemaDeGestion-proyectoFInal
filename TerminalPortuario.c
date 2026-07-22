@@ -15,7 +15,7 @@ typedef struct Pasajero {
  
 //Cola FIFO de pasajeros
 typedef struct {
-    Pasajero *frente;
+    Pasajero *cabeza;
     Pasajero *final;
     int cantidad;
 } FilaPasajeros;
@@ -42,7 +42,7 @@ typedef struct Destino {
  
 //Cola FIFO de destinos
 typedef struct {
-    Destino *frente;
+    Destino *cabeza;
     Destino *final;
     int cantidad;
 } FilaDestinos;
@@ -65,7 +65,7 @@ int main()
 }
 void inicializarFilaDestinos(FilaDestinos *fila)
 {
-    fila->frente = NULL;
+    fila->cabeza = NULL;
     fila->final = NULL;
     fila->cantidad = 0;
 }
@@ -92,7 +92,7 @@ void registrarDestino(FilaDestinos *fila)
     scanf(" %[^\n]", nuevo->empresa);
 
     // Inicializar la cola de pasajeros
-    nuevo->pasajeros.frente = NULL;
+    nuevo->pasajeros.cabeza = NULL;
     nuevo->pasajeros.final = NULL;
     nuevo->pasajeros.cantidad = 0;
 
@@ -102,9 +102,9 @@ void registrarDestino(FilaDestinos *fila)
     nuevo->siguiente = NULL;
 
     // Insertar en la cola FIFO
-    if (fila->frente == NULL)
+    if (fila->cabeza == NULL)
     {
-        fila->frente = nuevo;
+        fila->cabeza = nuevo;
         fila->final = nuevo;
     }
     else
@@ -119,8 +119,34 @@ void registrarDestino(FilaDestinos *fila)
 }
 
 Destino *buscarDestino(FilaDestinos *fila, int codigo)
-{
-    return NULL;
+{   
+    // Si la cola esta vacia
+    if(fila->cabeza == NULL)
+    {
+        printf("\nNo hay destinos registrados. \n");
+        return NULL;
+    }
+    
+    // Apuntador auxiliar para recorrer la cola
+    Destino *aux = fila->cabeza;
+    
+    // Recorrer toda la cola
+
+    while (aux != NULL)
+    {
+        if(aux->codigo == codigo)
+        {
+            return aux; //Destino encontrado
+
+        }
+
+        aux = aux->siguiente;
+    }
+
+    // Si termina el recorrido y no lo encontro
+    printf("\nNo existe un destino con el codigo %d.\n", codigo);
+
+    return NULL; 
 }
 
 void mostrarDestinos(FilaDestinos *fila)
