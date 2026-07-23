@@ -1,0 +1,13 @@
+# Configuración de Visual Studio Code
+.vscode/
+
+# Ejecutables
+*.exe
+
+# Archivos objeto
+*.o
+*.obj
+
+# Archivos temporales
+*.tmp
+*.log
