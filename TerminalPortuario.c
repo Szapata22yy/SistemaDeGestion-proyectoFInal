@@ -52,6 +52,7 @@ void registrarDestino(FilaDestinos *fila);
 Destino *buscarDestino(FilaDestinos *fila, int codigo);
 void mostrarDestinos(FilaDestinos *fila);
 void modificarDestino(FilaDestinos *fila);
+void menu(FilaDestinos *fila); 
 
 int main()
 {
@@ -59,7 +60,7 @@ int main()
 
     inicializarFilaDestinos(&destinos);
 
-    registrarDestino(&destinos);
+    menu(&destinos);
 
     return 0;
 }
@@ -151,10 +152,82 @@ Destino *buscarDestino(FilaDestinos *fila, int codigo)
 
 void mostrarDestinos(FilaDestinos *fila)
 {
+    // Verificar si la cola está vacía
+    if (fila->cabeza == NULL)
+    {
+        printf("\nNo hay destinos registrados.\n");
+        return;
+    }
+
+    Destino *aux = fila->cabeza;
+
+    printf("\n=========================================\n");
+    printf("      DESTINOS REGISTRADOS\n");
+    printf("=========================================\n");
+
+    while (aux != NULL)
+    {
+        printf("\nCodigo: %d\n", aux->codigo);
+        printf("Nombre: %s\n", aux->nombre);
+        printf("Empresa: %s\n", aux->empresa);
+
+        aux = aux->siguiente;
+    }
+
+    printf("\n=========================================\n");
+    printf("Total de destinos registrados: %d\n", fila->cantidad);
 
 }
 
 void modificarDestino(FilaDestinos *fila)
 {
 
+}
+
+void menu(FilaDestinos *fila)
+{
+    int opcion;
+
+    do
+    {
+        printf("\n=========================================\n");
+        printf("   SISTEMA PORTUARIO TURISTICO\n");
+        printf("          BUENAVENTURA\n");
+        printf("=========================================\n");
+        printf("1. Registrar nuevo destino\n");
+        printf("2. Mostrar destinos registrados\n");
+        printf("3. Buscar destino\n");
+        printf("4. Modificar destino\n");
+        printf("5. Salir\n");
+        printf("=========================================\n");
+        printf("Seleccione una opcion: ");
+        scanf("%d", &opcion);
+
+        switch(opcion)
+        {
+            case 1:
+                registrarDestino(fila);
+                break;
+
+            case 2:
+                mostrarDestinos(fila);
+                break;
+
+            case 3:
+                printf("\nFuncion en desarrollo.\n");
+                break;
+
+            case 4:
+                printf("\nFuncion en desarrollo.\n");
+                break;
+
+            case 5:
+                printf("\nGracias por usar el sistema.\n");
+                break;
+
+            default:
+                printf("\nOpcion invalida. Intente nuevamente.\n");
+        }
+
+    } while(opcion != 5);
 }
