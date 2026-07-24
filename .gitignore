@@ -11,3 +11,5 @@
 # Archivos temporales
 *.tmp
 *.log
+
+*.h
